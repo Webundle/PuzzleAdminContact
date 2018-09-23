@@ -1,0 +1,24 @@
+{% trans_default_domain 'admin' %}
+
+{% extends 'PuzzleAdminContactBundle::layout_editor.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ "contact.update"|trans }} {{ contact.firstName }} {% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li><a href="{{ url('admin_contact_list') }}">{{ "contact.list"|trans }}</a></li>
+    <li class="active">{{ "contact.update"|trans }}</li>
+{% endblock %}
+{% block mainpage %}
+    {% include 'PuzzleAdminContactBundle:Contact:form.html.twig' with { ' form' : form, 'contact' : contact } %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts 
+        'bundles/puzzleadmin/js/pages/uploader.js'
+        output = 'compiled/js/admin_contact_editor.min.js'
+    %}
+		<script src="{{ asset_url }}" type="text/javascript"></script>
+	{% endjavascripts %}
+{% endblock %}

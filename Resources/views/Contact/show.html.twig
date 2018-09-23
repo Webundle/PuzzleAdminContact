@@ -1,0 +1,104 @@
+{% trans_default_domain 'admin' %}
+
+{% set active = "contact" %}
+
+{% set subactive = "admin_contact_list" %}
+
+{% extends 'PuzzleAdminContactBundle::layout_editor.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ contact.firstName }} {{ contact.lastName }} {% endblock %}
+
+{% block mainsubtitle %} - {{ contact.firstName }} {{ contact.lastName }} {% endblock %}
+
+
+{% block breadcrumbs %}
+<div class="breadcrumb-line">
+    <ul class="breadcrumb">
+        <li><a href="{{ url('admin_contact_list') }}">{{ "contact.action.contact.list"|trans }}</a></li>
+        <li class="active">{{ "contact.action.contact.show"|trans }}</li>
+    </ul>
+    <ul class="breadcrumb-elements">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="icon-plus position-left"></i>
+                Actions
+                <span class="caret"></span>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li>
+                    <a href="{{ url('admin_contact_update', { 'id': contact.id }) }}" title="{{ "button.update"|trans }}" alt="{{ "button.update"|trans }}">
+                        <i class="icon-pencil"></i>
+                        {{ "button.update"|trans }}
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="{{ url('admin_contact_delete', {'id': contact.id}) }}" title="{{ "button.remove"|trans }}" class="remove-item" id="remove-item-{{ contact.id }}">
+                        <i class="icon-trash-alt text-danger"></i>
+                        {{ "button.remove"|trans }}
+                    </a>
+                    <input type="hidden" id="label-remove-item-{{ contact.id }}" value="{{ contact.firstName }} {{ contact.lastName }}">
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+{% endblock %}
+{% block mainpage %}
+    <div class="panel panel-flat">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-4 text-center">
+                    {% if contact.picture is not empty %}
+                        {% set src = render_api_media_file(contact.picture) %}
+                    {% else %}
+                        {% set src = asset('bundles/puzzleadmin/img/blank.png') %}
+                    {% endif %}
+                    <div class="thumb-rounded thumb-slide">
+                        <img src="{{ src }}" width="150" height="150">
+                        <label>{{ "contact.label.contact.picture"|trans }}</label>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>{{ "contact.label.contact.civility"|trans }}</label>
+                        <input class="form-control" disabled value="{{ contact.civility|trans|default('') }}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ "contact.label.contact.firstName"|trans }}</label>
+                        <input class="form-control" disabled value="{{ contact.firstName }}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ "contact.label.contact.lastName"|trans }}</label>
+                        <input class="form-control" disabled value="{{ contact.lastName }}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ "contact.label.contact.email"|trans }}</label>
+                        <input class="form-control" disabled value="{{ contact.email }}"/>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>{{ "contact.label.contact.phone"|trans }}</label>
+                        <input class="form-control" disabled value="{{ contact.phone }}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ "contact.label.contact.company"|trans }}</label>
+                        <input class="form-control" disabled value="{{ contact.company }}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ "contact.label.contact.position"|trans }}</label>
+                        <input class="form-control" disabled value="{{ contact.position }}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ "contact.label.contact.location"|trans }}</label>
+                        <input class="form-control" disabled value="{{ contact.location }}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
+

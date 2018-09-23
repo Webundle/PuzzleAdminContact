@@ -1,0 +1,28 @@
+# Group
+admin_contact_group_list:
+    path:     /list
+    defaults: { _controller: 'PuzzleAdminContactBundle:Group:list' }
+
+admin_contact_group_create:
+    path:     /create
+    defaults: { _controller: 'PuzzleAdminContactBundle:Group:create' }
+
+admin_contact_group_show:
+    path:     /{id}
+    defaults: { _controller: 'PuzzleAdminContactBundle:Group:show' }
+
+admin_contact_group_update:
+    path:     /{id}/update
+    defaults: { _controller: 'PuzzleAdminContactBundle:Group:update' }
+
+admin_contact_group_add_contact:
+    path:     /{id}/add-contact/{item}
+    defaults: { _controller: 'PuzzleAdminContactBundle:Group:addContact' }
+
+admin_contact_group_remove_contact:
+    path:     /{id}/remove-contact/{item}
+    defaults: { _controller: 'PuzzleAdminContactBundle:Group:removeContact' }
+
+admin_contact_group_delete:
+    path:     /{id}/delete
+    defaults: { _controller: 'PuzzleAdminContactBundle:Group:delete' }

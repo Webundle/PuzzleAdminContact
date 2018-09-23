@@ -1,0 +1,7 @@
+group:
+    resource: '@PuzzleAdminContactBundle/Resources/config/routing/group.yml'
+    prefix: '/groups'
+
+contact:
+    resource: '@PuzzleAdminContactBundle/Resources/config/routing/contact.yml'
+    prefix: '/contacts'

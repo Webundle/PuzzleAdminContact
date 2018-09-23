@@ -1,0 +1,64 @@
+{% trans_default_domain 'admin' %}
+
+{{ form_start(form, { 'attr' : {'class' : 'uk-form-stacked'}, 'multipart' : true } ) }}
+<div class="panel panel-flat">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-4">
+                <label>{{ "contact.picture"|trans }}</label>
+                {% if contact is defined and contact.picture is not empty %}
+                    {% include 'PuzzleAdminMediaBundle:File:embbed.html.twig' with { 'type' : 'image', 'previews' : render_api_media_file(contact.picture) } %}
+                {% else %}
+                    {% include 'PuzzleAdminMediaBundle:File:embbed.html.twig' with { 'type' : 'image' } %}
+                {% endif %}
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    {{ form_label(form.civility) }}
+                    {{ form_widget(form.civility) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.firstName) }}
+                    {{ form_widget(form.firstName) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.lastName) }}
+                    {{ form_widget(form.lastName) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email) }}
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    {{ form_label(form.phone) }}
+                    {{ form_widget(form.phone) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.company) }}
+                    {{ form_widget(form.company) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.position) }}
+                    {{ form_widget(form.position) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.location) }}
+                    {{ form_widget(form.location) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-center">
+    <a class="btn btn-default" href="{{ url('admin_contact_list') }}">
+        <i class="icon-arrow-left8"></i>
+        {{ 'button.back'|trans }}
+    </a>
+    <button class="btn btn-success">
+        {{ contact is defined ? 'button.update'|trans : 'button.add'|trans }}
+        <i class="icon-checkmark2"></i>
+    </button>
+</div>
+{{ form_end(form) }}

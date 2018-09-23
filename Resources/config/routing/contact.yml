@@ -1,0 +1,21 @@
+admin_contact_list:
+    path:     /list
+    defaults: { _controller: 'PuzzleAdminContactBundle:Contact:list' }
+
+admin_contact_create:
+    path:     /create
+    defaults: { _controller: 'PuzzleAdminContactBundle:Contact:create' }
+    
+admin_contact_show:
+    path:     /{id}
+    defaults: { _controller: 'PuzzleAdminContactBundle:Contact:show' }
+
+admin_contact_update:
+    path:     /{id}/update
+    defaults: { _controller: 'PuzzleAdminContactBundle:Contact:update' }
+
+admin_contact_delete:
+    path:     /{id}/delete
+    defaults: { _controller: 'PuzzleAdminContactBundle:Contact:delete' }
+    options:
+        expose: true

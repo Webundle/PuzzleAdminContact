@@ -1,0 +1,141 @@
+{% trans_default_domain 'admin' %}
+
+{% set active = "contact" %}
+
+{% set subactive = "admin_contact_list" %}
+
+{% extends 'PuzzleAdminContactBundle::layout_table.html.twig' %}
+
+{% block title %} {{ parent() }} - {{ "contact.action.group.show"|trans|capitalize }} {{ group.name|capitalize }} {% endblock %}
+
+{% block mainsubtitle %} - {{ group.name|capitalize }}{% endblock %}
+
+{% block headingelements %}
+<a href="{{ url('admin_contact_create', { 'group': group.id }) }}" class="btn btn-primary btn-labeled">
+    <b><i class="icon-add"></i></b>
+    {{ "contact.action.contact.create"|trans }}
+</a>
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumb-line">
+    <ul class="breadcrumb">
+        <li><a href="{{ url('admin_contact_list') }}">{{ "contact.title"|trans|capitalize }}</a></li>
+        <li class="active">{{ group.name|capitalize }}</li>
+    </ul>
+    <ul class="breadcrumb-elements">
+        {% if contacts is not empty %}
+        <li>
+            <a href="#" class="text-danger remove-list toggle-action hide">
+                <i class="icon-trash-alt"></i> {{ "button.remove_list"|trans }}
+            </a>
+            <input type="hidden" value="admin_contact_group_remove_contact" id="remove-route-name"/>
+            <input type="hidden" value="{{ group.id }}" id="remove-route-param"/>
+        </li>
+        <li>
+            <a href="#" id="toggle-check">
+                <i class="icon-checkbox-unchecked toggle-icon" id="toggle-check-icon"></i> 
+                <span id="toggle-check-text">{{ "button.select_all"|trans }}</span>
+            </a>
+            <input type="hidden" value="{{ contacts|length|default('0') }}" id="toggle-items-count">
+            <input type="hidden" value="0" id="toggle-items-checked-count">
+        </li>
+        {% endif %}
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="icon-plus position-left"></i>
+                Actions
+                <span class="caret"></span>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li>
+                    <a href="{{ url('admin_contact_group_update', { 'id': group.id }) }}" class="show-modal">
+                        <i class="icon-pencil"></i>
+                        {{ "button.update"|trans }}
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="{{ url('admin_contact_group_delete', {'id': group.id}) }}" class="remove-item" id="remove-item-{{ group.id }}">
+                        <i class="icon-trash-alt text-danger"></i>
+                        {{ "button.delete"|trans }}
+                    </a>
+                    <input type="hidden" id="label-delete-item-{{ group.id }}" value="{{ group.name }}">
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block mainpage %}
+<div class="sidebar-main-hidden has-detached-left">
+    {{ render(controller('PuzzleAdminContactBundle:Group:list', { 'current': group.id })) }}
+    <div class="container-detached">
+        <div class="content-detached">
+            <div class="panel panel-flat">
+                <table class="table datatable">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>{{ "contact.label.contact.firstName"|trans }}</th>
+                            <th>{{ "contact.label.contact.lastName"|trans }}</th>
+                            <th>{{ "contact.label.contact.email"|trans }}</th>
+                            <th>{{ "contact.label.contact.phone"|trans }}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for contact in contacts %}
+                            <tr class="toggleable" id="item-{{ contact.id }}">
+                                <td>
+                                    <a class="text-muted text-small uk-text-left hide toggleable-btn toggleable-btn-select" href="#">
+                                        <i class="icon-checkbox-unchecked toggle-icon toggle-item" id="toggle-item-{{ contact.id }}"></i>
+                                    </a>
+                                </td>
+                                <td>{{ contact.firstName }}</td>
+                                <td>{{ contact.lastName }}</td>
+                                <td>{{ contact.email }}</td>
+                                <td>{{ contact.phone }}</td>
+                                <td class="uk-text-right">
+                                    <ul class="icons-list toggleable-btn hide toggleable-btn-controls">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <i class="icon-menu9"></i>
+                                            </a>
+
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li>
+                                                    <a href="{{ url('admin_contact_show', { 'id': contact.id }) }}">
+                                                        <i class="icon-eye"></i> 
+                                                        {{ "button.show"|trans }}
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ url('admin_contact_update', { 'id': contact.id }) }}">
+                                                        <i class="icon-pencil"></i> 
+                                                        {{ "button.update"|trans }}
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ url('admin_contact_delete', {'id': contact.id}) }}" data-toggle="modal" title="{{ "button.remove"|trans }}" class="remove-item" id="remove-item-{{ contact.id }}">
+                                                        <i class="icon-trash-alt text-danger"></i>
+                                                        {{ "button.remove"|trans }}
+                                                    </a>
+                                                    <input type="hidden" id="label-remove-item-{{ contact.id }}" value="{{ contact.firstName }} {{ contact.lastName }}">
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

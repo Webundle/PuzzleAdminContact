@@ -1,0 +1,44 @@
+contact:
+    base: 'Contacts'
+    description: 'Gestion des contacts'
+    icon: 'icon-address-book'
+    role:
+        contact: 'Gérer vos contacts'
+    civility:
+        base: 'Civilité'
+        default:
+            empty: 'Aucune'
+            M: 'M'
+            Mrs: 'Mme'
+            Ms: 'Mlle'
+    firstName: 'Nom'
+    lastName: 'Prénoms'
+    fullName: 'Nom & Prénoms'
+    email: 'E-mail'
+    phone: 'Téléphone'
+    company: 'Entreprise'
+    position: 'Poste'
+    location: 'Localisation'
+    picture: 'Photo de profil'
+    
+    list: 'Liste des contacts'
+    show: 'Détails du contact'
+    create: 'Nouveau contact'
+    update: 'Modifier'
+    remove: 'Etes-vous sûr de vouloir supprimer le contact'
+    remove_list: 'Etes-vous sûr de vouloir supprimer la sélection d''utilisateurs'
+    
+    group:
+        base: 'Groupes'
+        name: 'Nom'
+        description: 'Description'
+        contacts: 'Contacts'
+        list: 'Liste des groupes'
+        show: 'Détails du groupe'
+        create: 'Nouveau groupe'
+        update: 'Modifier le groupe'
+        remove: 'Etes-vous sûr de vouloir supprimer le groupe'
+        remove_list: 'Etes-vous sûr de vouloir supprimer la sélection de groupes'
+            
+
+
