@@ -31,11 +31,10 @@
         "webundle/puzzle-api-contact": "^1.0"
     },
     "autoload" : {
-        "psr-0" : {
-            "Webundle\\Puzzle\\Admin\\ContactBundle" : ""
+        "psr-4" : {
+            "Puzzle\\Admin\\ContactBundle\\" : ""
         }
     },
-    "target-dir" : "Webundle/Puzzle/Admin/ContactBundle",
     "extra" : {
         "branch-alias" : {
             "dev-master" : "1.0-dev"
